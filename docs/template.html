@@ -47,8 +47,14 @@
 
   <h2>Computer</h2>
   <div class="card">
-    <p>Drag this button to your bookmarks bar:</p>
-    <p><a class="bookmarklet" href="{{BOOKMARKLET}}">Export schedule</a></p>
+    <p><strong>Chrome or Firefox:</strong> show the bookmarks bar (Ctrl+Shift+B), then drag this button onto it:</p>
+    <p><a class="bookmarklet" href="{{BOOKMARKLET}}" title="Drag me to your bookmarks bar">Export schedule</a></p>
+    <p><strong>Edge, or if dragging doesn't work:</strong></p>
+    <ol>
+      <li>Click <button type="button" data-copy="main">Copy bookmark code</button></li>
+      <li>Press Ctrl+D to bookmark this page. Name it <code>Export schedule</code> and save it to the favorites bar.</li>
+      <li>Right-click the new favorite, choose <strong>Edit</strong>, and replace the URL with the copied code.</li>
+    </ol>
     <p class="muted">Then open your Agent Schedule page and click the bookmark. Open the downloaded file with Outlook or Apple Calendar, or import it in Google Calendar under Settings &rarr; Import &amp; export.</p>
   </div>
 
