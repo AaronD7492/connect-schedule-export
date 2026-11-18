@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connect Schedule Export</title>
+<style>
+  body { font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #16191f; margin: 0; background: #f8f8f8; }
+  main { max-width: 680px; margin: 0 auto; padding: 24px 20px 48px; }
+  h1 { font-size: 26px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  .card { background: #fff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin: 16px 0; }
+  .bookmarklet { display: inline-block; padding: 12px 20px; background: #0972d3; color: #fff; border-radius: 10px; text-decoration: none; font-weight: 600; cursor: grab; }
+  button { min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid #0972d3; background: #fff; color: #0972d3; font-size: 17px; font-weight: 600; cursor: pointer; }
+  ol { padding-left: 22px; } li { margin: 6px 0; }
+  .muted { color: #545b64; font-size: 15px; }
+  code { background: #f2f3f3; padding: 1px 5px; border-radius: 4px; }
+  textarea { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Connect Schedule Export</h1>
+  <p>Put your Amazon Connect schedule in your phone's calendar. The tool runs in your own browser while you're signed in to your Agent Schedule page. It reads your shifts and gives you a calendar (.ics) file. Nothing is sent anywhere, and it never sees your password.</p>
+  <p class="muted">Version {{VERSION}}. Use it on a personal device. Company devices block scripts.</p>
+
+  <h2>iPhone (Safari)</h2>
+  <div class="card">
+    <ol>
+      <li>Tap <button type="button" data-copy="main">Copy bookmark code</button></li>
+      <li>Tap the Share button, then <strong>Add Bookmark</strong>, and save this page as a bookmark.</li>
+      <li>Open Bookmarks, tap <strong>Edit</strong>, tap the new bookmark. Rename it <code>Export schedule</code>, clear the address and paste the code. Tap Done.</li>
+      <li>Open your Agent Schedule page in Amazon Connect, open Bookmarks and tap <strong>Export schedule</strong>.</li>
+      <li>Tap <strong>Download .ics</strong>, open Safari's downloads list, tap the file, then <strong>Add All</strong>.</li>
+    </ol>
+  </div>
+
+  <h2>Android (Chrome)</h2>
+  <div class="card">
+    <ol>
+      <li>Tap <button type="button" data-copy="main">Copy bookmark code</button></li>
+      <li>Tap the star to bookmark this page, then tap <strong>Edit</strong>. Name it <code>Export schedule</code> and paste the code over the URL.</li>
+      <li>On your Agent Schedule page, tap the address bar, type <code>Export schedule</code> and tap the bookmark in the suggestions (it shows a star).</li>
+      <li>Tap <strong>Download .ics</strong>, open the file from your notifications or Downloads and confirm the import in Google Calendar. If your phone can't open it, import it at calendar.google.com on a computer.</li>
+    </ol>
+  </div>
+
+  <h2>Computer</h2>
+  <div class="card">
+    <p>Drag this button to your bookmarks bar:</p>
+    <p><a class="bookmarklet" href="{{BOOKMARKLET}}">Export schedule</a></p>
+    <p class="muted">Then open your Agent Schedule page and click the bookmark. Open the downloaded file with Outlook or Apple Calendar, or import it in Google Calendar under Settings &rarr; Import &amp; export.</p>
+  </div>
+
+  <h2>Diagnostics</h2>
+  <div class="card">
+    <p class="muted">If the tool doesn't work, install this second bookmark the same way and run it on your schedule page. It checks the page, moves one week forward and back, and shows results you can copy and send to the developer.</p>
+    <p><a class="bookmarklet" href="{{PROBE_BOOKMARKLET}}">Schedule diagnostics</a> <button type="button" data-copy="probe">Copy diagnostics code</button></p>
+  </div>
+
+  <textarea id="code-main" readonly>{{BOOKMARKLET}}</textarea>
+  <textarea id="code-probe" readonly>{{PROBE_BOOKMARKLET}}</textarea>
+</main>
+<script>
+  for (const button of document.querySelectorAll('[data-copy]')) {
+    button.addEventListener('click', async () => {
+      const area = document.getElementById('code-' + button.dataset.copy);
+      const label = button.textContent;
+      try {
+        await navigator.clipboard.writeText(area.value);
+      } catch {
+        area.select();
+        document.execCommand('copy');
+      }
+      button.textContent = 'Copied';
+      setTimeout(() => (button.textContent = label), 2000);
+    });
+  }
+</script>
+</body>
+</html>
