@@ -51,8 +51,11 @@ async function bundle(entry, { minify }) {
 }
 
 function toBookmarklet(code) {
-  // encodeURIComponent keeps the link safe to paste on any browser, including phones.
-  return 'javascript:' + encodeURIComponent(code);
+  // encodeURI escapes spaces, quotes, %, non-ASCII and line breaks but leaves
+  // ordinary punctuation alone, so the link is much shorter than with
+  // encodeURIComponent. "#" must also be escaped, or browsers treat the rest
+  // of the code as a page fragment.
+  return 'javascript:' + encodeURI(code).replace(/#/g, '%23');
 }
 
 const escapeHtml = (s) =>

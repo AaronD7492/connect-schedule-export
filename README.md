@@ -15,6 +15,7 @@ Install page: GitHub Pages, served from the `docs/` folder (see "Publishing").
 2. It moves forward week by week until it finds 14 empty days in a row, then returns to the week you started on.
 3. It keeps only the activity types listed in `src/core/registry.js` (On Queue, On Queue - In Office, Meal, Project). Anything else, such as Paid Absent, is treated as time not worked and named in the summary.
 4. It builds an RFC 5545 calendar file with UTC times. Event IDs come from Connect, so re-importing updates events instead of duplicating them.
+5. Settings (saved in your browser): reminders and how many minutes before, all published weeks or this week only, and a calendar name or include/leave-out choice for each activity type.
 
 Design documents: Phase 1 Analysis and Design Document (shared separately).
 
@@ -32,7 +33,8 @@ npm run build    # writes dist/ and docs/index.html
 
 ```text
 src/
-  core/        parser.js, registry.js, collector.js, icsBuilder.js   (no browser code; tested in Node)
+  core/        parser.js, registry.js, collector.js, icsBuilder.js,
+               summary.js                                            (no browser code; tested in Node)
   adapters/    pageReader.js, weekNavigator.js                       (the only code that knows the page layout)
                download.js, settings.js                              (browser services)
   ui/          panel.js                                              (export panel, in its own shadow root)

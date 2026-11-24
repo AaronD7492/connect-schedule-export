@@ -11,7 +11,10 @@ export const DEFAULT_SETTINGS = Object.freeze({
   reminderMinutes: 15,
   renames: Object.freeze({}),
   excludedNames: Object.freeze([]),
+  scope: 'all',
 });
+
+export const SCOPES = Object.freeze(['all', 'current']);
 
 export function normalizeSettings(raw) {
   const value = raw && typeof raw === 'object' ? raw : {};
@@ -29,6 +32,7 @@ export function normalizeSettings(raw) {
     excludedNames: Array.isArray(value.excludedNames)
       ? value.excludedNames.filter((n) => typeof n === 'string' && n.trim())
       : [],
+    scope: SCOPES.includes(value.scope) ? value.scope : 'all',
   };
 }
 

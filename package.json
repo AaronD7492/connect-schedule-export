@@ -1,6 +1,6 @@
 {
   "name": "connect-schedule-export",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "Export your Amazon Connect agent schedule to an .ics calendar file, entirely in your browser.",
   "private": true,
   "type": "module",
