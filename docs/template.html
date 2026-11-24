@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connect Schedule Export</title>
+<title>Connect Schedule Export{{TITLE_SUFFIX}}</title>
 <style>
   body { font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #16191f; margin: 0; background: #f8f8f8; }
   main { max-width: 680px; margin: 0 auto; padding: 24px 20px 48px; }
@@ -16,11 +16,13 @@
   .muted { color: #545b64; font-size: 15px; }
   code { background: #f2f3f3; padding: 1px 5px; border-radius: 4px; }
   textarea { position: absolute; left: -9999px; }
+  .banner { background: #fff4e5; border: 1px solid #f0ad4e; border-radius: 10px; padding: 12px 16px; margin-bottom: 16px; }
 </style>
 </head>
 <body>
 <main>
-  <h1>Connect Schedule Export</h1>
+  {{CHANNEL_BANNER}}
+  <h1>Connect Schedule Export{{TITLE_SUFFIX}}</h1>
   <p>Put your Amazon Connect schedule in your phone's calendar. The tool runs in your own browser while you're signed in to your Agent Schedule page. It reads your shifts and gives you a calendar (.ics) file. Nothing is sent anywhere, and it never sees your password.</p>
   <p class="muted">Version {{VERSION}}. Use it on a personal device. Company devices block scripts.</p>
 
@@ -29,8 +31,8 @@
     <ol>
       <li>Tap <button type="button" data-copy="main">Copy bookmark code</button></li>
       <li>Tap the Share button, then <strong>Add Bookmark</strong>, and save this page as a bookmark.</li>
-      <li>Open Bookmarks, tap <strong>Edit</strong>, tap the new bookmark. Rename it <code>Export schedule</code>, clear the address and paste the code. Tap Done.</li>
-      <li>Open your Agent Schedule page in Amazon Connect, open Bookmarks and tap <strong>Export schedule</strong>.</li>
+      <li>Open Bookmarks, tap <strong>Edit</strong>, tap the new bookmark. Rename it <code>{{BOOKMARK_NAME}}</code>, clear the address and paste the code. Tap Done.</li>
+      <li>Open your Agent Schedule page in Amazon Connect, open Bookmarks and tap <strong>{{BOOKMARK_NAME}}</strong>.</li>
       <li>Tap <strong>Download .ics</strong>, open Safari's downloads list, tap the file, then <strong>Add All</strong>.</li>
     </ol>
   </div>
@@ -39,8 +41,8 @@
   <div class="card">
     <ol>
       <li>Tap <button type="button" data-copy="main">Copy bookmark code</button></li>
-      <li>Tap the star to bookmark this page, then tap <strong>Edit</strong>. Name it <code>Export schedule</code> and paste the code over the URL.</li>
-      <li>On your Agent Schedule page, tap the address bar, type <code>Export schedule</code> and tap the bookmark in the suggestions (it shows a star).</li>
+      <li>Tap the star to bookmark this page, then tap <strong>Edit</strong>. Name it <code>{{BOOKMARK_NAME}}</code> and paste the code over the URL.</li>
+      <li>On your Agent Schedule page, tap the address bar, type <code>{{BOOKMARK_NAME}}</code> and tap the bookmark in the suggestions (it shows a star).</li>
       <li>Tap <strong>Download .ics</strong>, open the file from your notifications or Downloads and confirm the import in Google Calendar. If your phone can't open it, import it at calendar.google.com on a computer.</li>
     </ol>
   </div>
@@ -48,11 +50,11 @@
   <h2>Computer</h2>
   <div class="card">
     <p><strong>Chrome or Firefox:</strong> show the bookmarks bar (Ctrl+Shift+B), then drag this button onto it:</p>
-    <p><a class="bookmarklet" href="{{BOOKMARKLET}}" title="Drag me to your bookmarks bar">Export schedule</a></p>
+    <p><a class="bookmarklet" href="{{BOOKMARKLET}}" title="Drag me to your bookmarks bar">{{BOOKMARK_NAME}}</a></p>
     <p><strong>Edge, or if dragging doesn't work:</strong></p>
     <ol>
       <li>Click <button type="button" data-copy="main">Copy bookmark code</button></li>
-      <li>Press Ctrl+D to bookmark this page. Name it <code>Export schedule</code> and save it to the favorites bar.</li>
+      <li>Press Ctrl+D to bookmark this page. Name it <code>{{BOOKMARK_NAME}}</code> and save it to the favorites bar.</li>
       <li>Right-click the new favorite, choose <strong>Edit</strong>, and replace the URL with the copied code.</li>
     </ol>
     <p class="muted">Then open your Agent Schedule page and click the bookmark. Open the downloaded file with Outlook or Apple Calendar, or import it in Google Calendar under Settings &rarr; Import &amp; export.</p>

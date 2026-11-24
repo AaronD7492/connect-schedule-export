@@ -12,7 +12,9 @@ import { downloadText } from './adapters/download.js';
 import { loadSettings } from './adapters/settings.js';
 import { createPanel } from './ui/panel.js';
 
-export const VERSION = '0.1.0';
+/* global __VERSION__ */
+// Set by the build script (e.g. "0.1.0" or "0.1.0-dev.abc1234"); "local" when run unbuilt in tests.
+export const VERSION = typeof __VERSION__ === 'string' ? __VERSION__ : 'local';
 
 export const MESSAGES = Object.freeze({
   wrongPage: 'Open your Agent Schedule page in Amazon Connect, then tap the bookmark again.',
