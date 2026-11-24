@@ -1,0 +1,79 @@
+# Builds both install pages and publishes them together on GitHub Pages:
+#   main -> https://<user>.github.io/connect-schedule-export/       (stable, for agents)
+#   dev  -> https://<user>.github.io/connect-schedule-export/dev/   (work in progress)
+# Runs on every push to either branch. Tests must pass before anything is published.
+# One-time setup: repo Settings -> Pages -> Source: "GitHub Actions".
+
+name: Publish install pages
+
+on:
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: main
+
+      - name: Check out dev (if it exists)
+        id: dev
+        continue-on-error: true
+        uses: actions/checkout@v6
+        with:
+          ref: dev
+          path: dev
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Test and build stable (main)
+        working-directory: main
+        env:
+          CHANNEL: stable
+          OUT_DIR: ../site
+        run: |
+          npm ci
+          npm test
+          npm run build
+
+      - name: Test and build dev
+        if: steps.dev.outcome == 'success'
+        working-directory: dev
+        env:
+          CHANNEL: dev
+          OUT_DIR: ../site/dev
+        run: |
+          npm ci
+          npm test
+          GITHUB_SHA=$(git rev-parse HEAD) npm run build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

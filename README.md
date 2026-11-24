@@ -57,11 +57,24 @@ Run the diagnostics bookmarklet on the live page to see what changed, save a new
 Run `tools/probe.js` on the Agent Schedule page: paste it into the browser console (F12), or use the Diagnostics bookmarklet from the install page.
 It reports whether the schedule can be reached, whether activity descriptions match, and whether week navigation works.
 
-## Publishing
+## Branches and publishing
 
-1. `npm run build`
-2. Commit, including `docs/index.html`.
-3. On GitHub, go to Settings → Pages, and choose Deploy from a branch: `main`, folder `/docs`.
+| Branch | Purpose | Install page |
+| --- | --- | --- |
+| `main` | Stable, tested version for agents | `https://<user>.github.io/connect-schedule-export/` |
+| `dev` | Work in progress | `https://<user>.github.io/connect-schedule-export/dev/` |
+
+GitHub Actions (`.github/workflows/pages.yml`) runs the tests and builds both pages on every push to either branch.
+If the tests fail, nothing is published. The dev page has a warning banner, "(dev)" in the bookmark name and a `-dev` version number in the panel.
+
+Do new work on `dev`. When it's tested, merge `dev` into `main` to release it.
+
+One-time setup on GitHub:
+
+1. Settings → Pages → Source: **GitHub Actions**.
+2. Settings → Environments → `github-pages` → Deployment branches: add `dev` next to `main`.
+
+`npm run build` locally writes `docs/index.html` for previewing. That file isn't committed.
 
 ## Privacy notes for contributors
 
